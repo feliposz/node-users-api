@@ -1,10 +1,11 @@
 const express = require('express');
-const db = require('../models/db');
+const Usuario = require('../models/usuario.model');
+const Grupo = require('../models/grupo.model');
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    const usuarios = await db.Usuario.find();
+    const usuarios = await Usuario.find();
     return res.json(usuarios);
   } catch (e) {
     next(e);
@@ -13,9 +14,8 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    await db.Usuario.create({
-      nome: req.body.nome,
-      senha: req.body.senha
+    await Usuario.create({
+      nome: req.body.nome
     });
     return res.status(201).send('ok');
   } catch (e) {
@@ -25,7 +25,7 @@ router.post('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const usuario = await db.Usuario.findById(req.params.id);
+    const usuario = await Usuario.findById(req.params.id);
     if (!usuario) {
       return res.status(404).send('não encontrado');
     }
@@ -37,7 +37,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.get('/:id/grupos', async (req, res, next) => {
   try {
-    const usuario = await db.Usuario.findById(req.params.id).populate('grupos');
+    const usuario = await Usuario.findById(req.params.id).populate('grupos');
     if (!usuario) {
       return res.status(404).send('não encontrado');
     }
@@ -49,7 +49,7 @@ router.get('/:id/grupos', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const usuario = await db.Usuario.findOneAndUpdate({ _id: req.params.id }, {
+    const usuario = await Usuario.findOneAndUpdate({ _id: req.params.id }, {
       nome: req.body.nome
     });
     if (!usuario) {
@@ -63,8 +63,9 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    // TODO: Remover usuário dos grupos?
-    const usuario = await db.Usuario.findOneAndDelete({ _id: req.params.id });
+    await Grupo.updateMany({ 'usuarios': req.params.id }, 
+      { $pull: { usuarios: req.params.id } });
+    const usuario = await Usuario.findOneAndDelete({ _id: req.params.id });
     if (!usuario) {
       return res.status(404).send('não encontrado');
     }
