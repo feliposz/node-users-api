@@ -30,7 +30,7 @@ router.post('/', async (req, res, next) => {
       usuarios: req.body.usuarios
     });
     await Usuario.updateMany({ _id: { $in: req.body.usuarios } }, { $push: { 'grupos': grupo } });
-    return res.status(201).send('ok');
+    return res.status(201).json(grupo);
   }
   catch (e) {
     next(e);
@@ -49,6 +49,10 @@ router.get('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
+    const grupo = await Grupo.findById(req.params.id);
+    if (!grupo) {
+      return res.status(404).send('grupo não encontrado');
+    }    
     if (req.body.usuarios.length < 1) {
       return res.status(400).send('grupo não pode ficar com menos de um usuário');
     }
@@ -56,11 +60,10 @@ router.put('/:id', async (req, res, next) => {
     if (usuarios.length !== req.body.usuarios.length) {
       return res.status(404).send('usuário(s) não encontrado(s)');
     }
-    await Grupo.findOneAndUpdate({ _id: req.params.id }, {
-      nome: req.body.nome,
-      usuarios: req.body.usuarios
-    });
-    return res.send('ok');
+    grupo.nome = req.body.nome;
+    grupo.usuarios = usuarios;
+    await grupo.save();
+    return res.json(grupo);
   }
   catch (e) {
     next(e);

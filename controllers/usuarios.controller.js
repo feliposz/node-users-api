@@ -14,10 +14,10 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    await Usuario.create({
+    const usuario = await Usuario.create({
       nome: req.body.nome
     });
-    return res.status(201).send('ok');
+    return res.status(201).json(usuario);
   } catch (e) {
     next(e);
   }
@@ -47,15 +47,15 @@ router.get('/:id/grupos', async (req, res, next) => {
   }
 });
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', async (req, res, next) => { 
   try {
-    const usuario = await Usuario.findOneAndUpdate({ _id: req.params.id }, {
-      nome: req.body.nome
-    });
+    const usuario = await Usuario.findById(req.params.id);
     if (!usuario) {
       return res.status(404).send('não encontrado');
     }
-    return res.send('ok');
+    usuario.nome = req.body.nome;
+    await usuario.save();
+    return res.json(usuario);
   } catch (e) {
     next(e);
   }

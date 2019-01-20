@@ -6,12 +6,19 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
 
-mongoose.connect(process.env.MONGODB, {useNewUrlParser: true});
+if (process.env.NODE_ENV === 'test') {
+  mongoose.connect(process.env.MONGODB_TEST, { useNewUrlParser: true });
+} else {
+  mongoose.connect(process.env.MONGODB, { useNewUrlParser: true });
+}
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(logger('dev'));
+if (process.env.NODE_ENV === 'dev') {
+  app.use(logger('dev'));
+}
+
 app.use('/', controllers);
 
 app.use((err, req, res, next) => {
@@ -25,12 +32,15 @@ app.use((err, req, res, next) => {
   return res.status(500).send('Erro interno');
 });
 
-mongoose.connection.once('open', () => {
+if (require.main === module) {
+
+  mongoose.connection.on('error', () => {
+    console.error('Banco de dados indisponível');
+  });
+
   app.listen(3000, () => {
     console.log('Aguardando na porta 3000');
   });
-});
+}
 
-mongoose.connection.on('error', () => {
-  console.error('Banco de dados indisponível');
-});
+module.exports = app;
