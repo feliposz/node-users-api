@@ -1,14 +1,16 @@
 API de usuários
 ===================
 
-Esta *API de usuários* é um projeto simples de exemplo de API Rest usando o framework **Node.js**.
+Esta *API de usuários* é um projeto simples de exemplo de API Rest usando o **Node.js** e o framework **Express**.
 
 Dependências:
+
 - Node.js
 - NPM
 - MongoDB
 
 Bibliotecas externas usadas:
+
 - Dotenv (configuração)
 - Body Parser (tratamento do corpo das requisições)
 - Express (tratamento das requisições HTTP)
