@@ -38,8 +38,8 @@ if (require.main === module) {
     console.error('Banco de dados indisponível');
   });
 
-  app.listen(3000, () => {
-    console.log('Aguardando na porta 3000');
+  app.listen(process.env.PORT, () => {
+    console.log('Aguardando na porta ' + process.env.PORT);
   });
 }
 

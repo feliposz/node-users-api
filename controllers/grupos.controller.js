@@ -52,8 +52,8 @@ router.put('/:id', async (req, res, next) => {
     const grupo = await Grupo.findById(req.params.id);
     if (!grupo) {
       return res.status(404).send('grupo não encontrado');
-    }    
-    if (req.body.usuarios.length < 1) {
+    }
+    if (!req.body.usuarios || req.body.usuarios.length < 1) {
       return res.status(400).send('grupo não pode ficar com menos de um usuário');
     }
     const usuarios = await Usuario.find({ _id: req.body.usuarios });
@@ -72,7 +72,8 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    await Grupo.findOneAndDelete({ _id: req.params.id });
+    //await Grupo.findOneAndDelete({ _id: req.params.id });
+    await Usuario.updateMany({ grupos: req.params.id }, { $pull: { grupos: req.params.id } });
     return res.send('ok');
   }
   catch (e) {
@@ -83,6 +84,9 @@ router.delete('/:id', async (req, res, next) => {
 router.get('/:id/usuarios', async (req, res, next) => {
   try {
     const grupo = await Grupo.findById(req.params.id).populate('usuarios');
+    if (!grupo) {
+      return res.status(404).send('Grupo não encontrado');
+    }
     return res.json(grupo.usuarios);
   }
   catch (e) {
@@ -104,7 +108,7 @@ router.post('/:id/usuarios', async (req, res, next) => {
     grupo.usuarios.push(req.body.idUsuario);
     await grupo.save();
     await usuario.save();
-    return res.send('ok');
+    return res.status(201).json(grupo.usuarios);
   }
   catch (e) {
     next(e);

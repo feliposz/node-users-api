@@ -15,14 +15,9 @@ describe('Grupos', function () {
     let usuarios = [];
 
     before((done) => {
-        const lista = [
-            { nome: 'A' },
-            { nome: 'B' },
-            { nome: 'C' }
-        ]
         Usuario.deleteMany({})
             .then(() => {
-                Usuario.insertMany(lista, (err, resultado) => {
+                Usuario.insertMany([ { nome: 'A' }, { nome: 'B' }, { nome: 'C' } ], (err, resultado) => {
                     usuarios = resultado;
                     done();
                 });
