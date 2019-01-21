@@ -1,0 +1,396 @@
+{
+	"info": {
+		"_postman_id": "b636c037-6d36-4cdf-8674-ae146be497cb",
+		"name": "gm-api-usuarios",
+		"description": "Exemplo de API para controle de usuários.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/usuarios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/usuarios",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nome\": \"Jon Snow\"\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/usuarios/:id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios/5c4381abd813ab045cbe2175",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios",
+						"5c4381abd813ab045cbe2175"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/usuarios/:id/grupos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios/5c4381abd813ab045cbe2175/grupos",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios",
+						"5c4381abd813ab045cbe2175",
+						"grupos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/usuarios/:id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nome\": \"Tyrion Lannister\"\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios/5c4381abd813ab045cbe2175",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios",
+						"5c4381abd813ab045cbe2175"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/usuarios/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios/5c4379ce6729611f1ccad993",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios",
+						"5c4379ce6729611f1ccad993"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/grupos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseURL}}/grupos",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"grupos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/grupos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nome\": \"Nightwatch\",\n    \"usuarios\": [\"5c4379cd6729611f1ccad992\", \"5c4379ce6729611f1ccad993\"]\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/grupos",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"grupos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/grupos/:id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseURL}}/grupos/5c4372009231fc26dc0b6bb8",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"grupos",
+						"5c4372009231fc26dc0b6bb8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/grupos/:id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nome\": \"Nightwatch\"\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/grupos/5c4372009231fc26dc0b6bb8",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"grupos",
+						"5c4372009231fc26dc0b6bb8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/grupos/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseURL}}/grupos/5c45068c3c52d1235c541d1e",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"grupos",
+						"5c45068c3c52d1235c541d1e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/grupos/:id/usuarios",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseURL}}/grupos/5c4374b516f1ed0324353a88/usuarios",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"grupos",
+						"5c4374b516f1ed0324353a88",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/grupos/:id/usuarios",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idUsuario\": \"5c4376b8f509061178a76a3d\"\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/grupos/5c43724f9231fc26dc0b6bb9/usuarios",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"grupos",
+						"5c43724f9231fc26dc0b6bb9",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/grupos/:id/usuarios",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseURL}}/grupos/5c4374b516f1ed0324353a88/usuarios/5c435d4c9231fc26dc0b6bb7",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"grupos",
+						"5c4374b516f1ed0324353a88",
+						"usuarios",
+						"5c435d4c9231fc26dc0b6bb7"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d0ac7229-8679-45ca-a7cc-9634afd7adbe",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1af13298-1ffb-447a-9766-35732cd2221b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "2c56d0ca-d849-43e4-b0d2-ffe4f0ab94c9",
+			"key": "baseURL",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
